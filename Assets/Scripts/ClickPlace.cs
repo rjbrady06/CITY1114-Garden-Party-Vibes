@@ -22,21 +22,21 @@ public class ClickPlace : MonoBehaviour
     private void OnMouseDown()
     {
         if(gameObject.name == "bunBottom")
-            Instantiate(cloneObj, new Vector3(1, .10f, 1.2f), cloneObj.rotation);
+            Instantiate(cloneObj, new Vector3(1, 1f, 1.2f), cloneObj.rotation);
 
         if(gameObject.name == "bunTop")
-            Instantiate (cloneObj, new Vector3(1, .60f, 1.2f), cloneObj.rotation);
+            Instantiate (cloneObj, new Vector3(1, 1.5f, 1.2f), cloneObj.rotation);
 
         if (gameObject.name == "Cheese")
-            Instantiate (cloneObj, new Vector3(1, .62f, -.05f), cloneObj.rotation);
+            Instantiate (cloneObj, new Vector3(1, 1.5f, 1.2f), cloneObj.rotation);
 
         if (gameObject.name == "Bacon")
         {
-            Instantiate(cloneObj, new Vector3(-.1f, .62f, 0), cloneObj.rotation);
-            Instantiate(cloneObj, new Vector3(.1f, .62f, 0), cloneObj.rotation);
+            Instantiate(cloneObj, new Vector3(0.934f, 1.4f, 1.2f), cloneObj.rotation);
+            Instantiate(cloneObj, new Vector3(1.07f, 1.4f, 1.2f), cloneObj.rotation);
         }
 
         GameFlow.plateValue += foodValue;
-        Debug.Log(GameFlow.plateValue + "  " + GameFlow.orderValue);
+        Debug.Log(GameFlow.plateValue+"  "+GameFlow.orderValue);
     }
 }
