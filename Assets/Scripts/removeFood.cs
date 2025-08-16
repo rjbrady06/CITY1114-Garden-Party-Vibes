@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class meatcon : MonoBehaviour
+public class removeFood : MonoBehaviour
 {
-    public Transform cloneObj;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -15,12 +13,9 @@ public class meatcon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void OnMouseDown()
-    {
-        if (gameObject.name == "Burger")
-            Instantiate(cloneObj, new Vector3(0f, 1.2f, .5f), cloneObj.rotation);
+        if ((GameFlow.emptyPlateNow>transform.position.x-.4f) && (GameFlow.emptyPlateNow < transform.position.x + .4f))
+        {
+            Destroy(gameObject);
+        }
     }
 }

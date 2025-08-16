@@ -22,21 +22,21 @@ public class ClickPlace : MonoBehaviour
     private void OnMouseDown()
     {
         if(gameObject.name == "bunBottom")
-            Instantiate(cloneObj, new Vector3(1, 1f, 1.2f), cloneObj.rotation);
+            Instantiate(cloneObj, new Vector3(GameFlow.plateXpos, 0.9f, 1f), cloneObj.rotation);
 
         if(gameObject.name == "bunTop")
-            Instantiate (cloneObj, new Vector3(1, 1.5f, 1.2f), cloneObj.rotation);
+            Instantiate (cloneObj, new Vector3(GameFlow.plateXpos, 1.5f, 1f), cloneObj.rotation);
 
         if (gameObject.name == "Cheese")
-            Instantiate (cloneObj, new Vector3(1, 1.5f, 1.2f), cloneObj.rotation);
+            Instantiate (cloneObj, new Vector3(GameFlow.plateXpos, 1.3f, 1f), cloneObj.rotation);
 
         if (gameObject.name == "Bacon")
         {
-            Instantiate(cloneObj, new Vector3(0.934f, 1.4f, 1.2f), cloneObj.rotation);
-            Instantiate(cloneObj, new Vector3(1.07f, 1.4f, 1.2f), cloneObj.rotation);
+            Instantiate(cloneObj, new Vector3(GameFlow.plateXpos - .1f, 1.4f, 1f), cloneObj.rotation);
+            Instantiate(cloneObj, new Vector3(GameFlow.plateXpos + .1f, 1.4f, 1f), cloneObj.rotation);
         }
 
-        GameFlow.plateValue += foodValue;
-        Debug.Log(GameFlow.plateValue+"  "+GameFlow.orderValue);
+        GameFlow.plateValue[GameFlow.plateNum] += foodValue;
+        Debug.Log(GameFlow.plateValue[GameFlow.plateNum]+"  " + GameFlow.orderValue[GameFlow.plateNum]);
     }
 }

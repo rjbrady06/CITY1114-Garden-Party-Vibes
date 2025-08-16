@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class ServePlate : MonoBehaviour
 {
+
+    public int thisPlate;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,9 +21,19 @@ public class ServePlate : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (GameFlow.orderValue == GameFlow.plateValue)
+        if (GameFlow.orderValue[GameFlow.plateNum] == GameFlow.plateValue[GameFlow.plateNum])
         {
-            Debug.Log("correct");
+            Debug.Log("correct" +"  "+GameFlow.orderTimer[GameFlow.plateNum]);
         }
+
+        GameFlow.emptyPlateNow = transform.position.x;
+        StartCoroutine(platereset());
+    }
+
+    IEnumerator platereset()
+    {
+        yield return new WaitForSeconds(.2f);
+        GameFlow.emptyPlateNow = -1;
+        GameFlow.totalCash += GameFlow.orderTimer[thisPlate] * .10f;
     }
 }
