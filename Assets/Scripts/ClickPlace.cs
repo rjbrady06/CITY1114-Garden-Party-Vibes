@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class ClickPlace : MonoBehaviour
@@ -35,6 +36,7 @@ public class ClickPlace : MonoBehaviour
             Instantiate(cloneObj, new Vector3(GameFlow.plateXpos - .1f, 1.4f, 1f), cloneObj.rotation);
             Instantiate(cloneObj, new Vector3(GameFlow.plateXpos + .1f, 1.4f, 1f), cloneObj.rotation);
         }
+
 
         GameFlow.plateValue[GameFlow.plateNum] += foodValue;
         Debug.Log(GameFlow.plateValue[GameFlow.plateNum]+"  " + GameFlow.orderValue[GameFlow.plateNum]);
