@@ -10,21 +10,30 @@ public class ServePlate : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnMouseDown()
     {
-        if (GameFlow.orderValue[GameFlow.plateNum] == GameFlow.plateValue[GameFlow.plateNum])
+        if (GameFlow.orderValue[thisPlate] == GameFlow.plateValue[thisPlate])
         {
-            Debug.Log("correct" +"  "+GameFlow.orderTimer[GameFlow.plateNum]);
+            Debug.Log("correct" + "  " + GameFlow.orderTimer[thisPlate]);
+            GameFlow.totalCash += GameFlow.orderTimer[thisPlate] * 0.10f; // Reward cash for serving
         }
+        else
+        {
+            Debug.Log("Incorrect plate served.");
+            // Optional: penalty or no cash
+        }
+
+        // Generate a new order for this plate
+        FindObjectOfType<GameFlow>().GenerateRandomOrder(thisPlate);
 
         GameFlow.emptyPlateNow = transform.position.x;
         StartCoroutine(platereset());
@@ -34,6 +43,6 @@ public class ServePlate : MonoBehaviour
     {
         yield return new WaitForSeconds(.2f);
         GameFlow.emptyPlateNow = -1;
-        GameFlow.totalCash += GameFlow.orderTimer[thisPlate] * .10f;
     }
 }
+
