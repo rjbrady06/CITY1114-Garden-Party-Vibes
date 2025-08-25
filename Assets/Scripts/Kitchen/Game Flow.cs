@@ -76,10 +76,6 @@ public class GameFlow : MonoBehaviour
             }
         }
 
-        // Simulate completing an order using number keys 1, 2, 3 (optional)
-        if (Input.GetKeyDown(KeyCode.Alpha1)) CompleteOrder(0);
-        if (Input.GetKeyDown(KeyCode.Alpha2)) CompleteOrder(1);
-        if (Input.GetKeyDown(KeyCode.Alpha3)) CompleteOrder(2);
     }
 
     public void GenerateRandomOrder(int index)

@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: b3d00fe070ed54b4899c4a8be17429ec
+  - enabled: 1
+    path: Assets/Scenes/BBQ Blitz.unity
+    guid: 87683d873e04bee4bb60761babe74647
   m_configObjects: {}
