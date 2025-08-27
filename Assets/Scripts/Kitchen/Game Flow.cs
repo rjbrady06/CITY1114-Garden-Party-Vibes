@@ -21,7 +21,7 @@ public class GameFlow : MonoBehaviour
     public Texture[] orderPics;
 
     public static float emptyPlateNow = -1;
-    public static float totalCash = 0;
+    public static int score = 50;
 
     private Dictionary<int, Texture> orderTextureMap;
 
@@ -72,9 +72,15 @@ public class GameFlow : MonoBehaviour
             if (orderTimer[i] <= 0)
             {
                 Debug.Log("Order " + i + " expired. Replacing with new order.");
+                GameFlow.score -= 5;
+
+                if (GameFlow.score < 0) GameFlow.score = 0;
                 GenerateRandomOrder(i);
+                
             }
         }
+
+       
 
     }
 
@@ -93,7 +99,6 @@ public class GameFlow : MonoBehaviour
     void CompleteOrder(int index)
     {
         Debug.Log("Order " + index + " completed!");
-        totalCash += 10f; // Add cash for completing
         GenerateRandomOrder(index); // Replace with a new one
     }
 }
