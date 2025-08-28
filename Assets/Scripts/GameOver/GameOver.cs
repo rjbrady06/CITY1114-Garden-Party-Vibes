@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 public class GameOver : MonoBehaviour
 {
@@ -45,7 +44,7 @@ public class GameOver : MonoBehaviour
 
         for (int i = 0; i < GameFlow.orderTimer.Length; i++)
         {
-            GameFlow.orderTimer[i] = 60f;
+            GameFlow.orderTimer[i] = 20f;
             GameFlow.orderValue[i] = 0;
             GameFlow.plateValue[i] = 0;
         }

@@ -14,7 +14,7 @@ public class MainMenu : MonoBehaviour
 
         for (int i = 0; i < GameFlow.orderTimer.Length; i++)
         {
-            GameFlow.orderTimer[i] = 60f;
+            GameFlow.orderTimer[i] = 20f;
             GameFlow.orderValue[i] = 0;
             GameFlow.plateValue[i] = 0;
         }
