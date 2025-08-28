@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameFlow : MonoBehaviour
 {
@@ -9,7 +10,9 @@ public class GameFlow : MonoBehaviour
 
     public static int[] orderValue = new int[3];
     public static int[] plateValue = new int[3];
-    public static float[] orderTimer = { 60, 60, 60 };
+    public static float[] orderTimer = { 20, 20, 20 };
+
+    public static bool[] orderCompleted = new bool[3];
 
     public static int plateNum = 0;
     public static float plateXpos = 1;
@@ -20,8 +23,12 @@ public class GameFlow : MonoBehaviour
 
     public Texture[] orderPics;
 
+    [SerializeField] private Texture blankTexture;
+
     public static float emptyPlateNow = -1;
     public static int score = 50;
+
+    [SerializeField] private TMP_Text[] orderTimerTexts = new TMP_Text[3];
 
     private Dictionary<int, Texture> orderTextureMap;
 
@@ -43,7 +50,15 @@ public class GameFlow : MonoBehaviour
         // Generate initial random orders
         for (int i = 0; i < 3; i++)
         {
-            GenerateRandomOrder(i);
+            currentPic[i].material.mainTexture = blankTexture;
+            orderValue[i] = 0;
+            orderTimer[i] = 0f;
+            orderTimerTexts[i].text = "";
+            
+        }
+        for (int i = 0; i < orderCompleted.Length; i++)
+        {
+            orderCompleted[i] = false;
         }
     }
 
@@ -67,16 +82,27 @@ public class GameFlow : MonoBehaviour
         // Decrease order timers
         for (int i = 0; i < orderTimer.Length; i++)
         {
+            if (orderValue[i] == 0 || orderCompleted[i]) continue;
+
             orderTimer[i] -= Time.deltaTime;
 
             if (orderTimer[i] <= 0)
             {
                 Debug.Log("Order " + i + " expired. Replacing with new order.");
-                GameFlow.score -= 5;
+                ClearOrder(i);
+                continue;
+            }
 
-                if (GameFlow.score < 0) GameFlow.score = 0;
-                GenerateRandomOrder(i);
-                
+            int secondsLeft = Mathf.CeilToInt(orderTimer[i]);
+            orderTimerTexts[i].text = secondsLeft.ToString();
+
+            if (orderTimer[i] < 10f)
+            {
+                orderTimerTexts[i].color = Color.red;
+            }
+            else
+            {
+                orderTimerTexts[i].color = Color.white;
             }
         }
 
@@ -88,17 +114,63 @@ public class GameFlow : MonoBehaviour
     {
         int randomOrder = possibleOrderValues[Random.Range(0, possibleOrderValues.Length)];
         orderValue[index] = randomOrder;
-        orderTimer[index] = 60f;
+        plateValue[index] = 0;
+        orderTimer[index] = 20f;
+        orderCompleted[index] = false;
 
         if (orderTextureMap.ContainsKey(randomOrder))
         {
             currentPic[index].material.mainTexture = orderTextureMap[randomOrder];
+            orderTimerTexts[index].text = "60";
+            orderTimerTexts[index].color = Color.white;
         }
     }
 
-    void CompleteOrder(int index)
+    public void GenerateNextAvailableOrder()
     {
-        Debug.Log("Order " + index + " completed!");
-        GenerateRandomOrder(index); // Replace with a new one
+        for(int i = 0; i < orderValue.Length; i++)
+        {
+            if (orderTimer[i] <= 0f || currentPic[i].material.mainTexture == blankTexture)
+            {
+                GenerateRandomOrder(i);
+                return;
+            }
+        }
+
+        Debug.Log("No available empty order slot.");
+    }
+
+    public void CompleteOrder(int index)
+    {
+        Debug.Log("Order " + index + " completed");
+
+        orderCompleted[index] = true;
+        ClearOrder(index);
+    }
+
+    public void ClearOrder(int index)
+    {
+        orderTimer[index] = 0f;
+        orderValue[index] = 0;
+        plateValue[index] = 0;
+
+        
+
+        currentPic[index].material.mainTexture = blankTexture;
+        orderTimerTexts[index].text = "";
+        orderTimerTexts[index].color = Color.white;
+    }
+
+    private IEnumerator DelayedOrderGeneration(int index)
+    {
+        yield return new WaitForSeconds(2f);
+
+        if (!orderCompleted[index])
+        {
+            yield break;
+        }
+
+        GenerateRandomOrder(index);
+        orderCompleted[index] = false;
     }
 }

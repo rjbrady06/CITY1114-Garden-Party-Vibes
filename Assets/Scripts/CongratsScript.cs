@@ -5,35 +5,35 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Runtime.InteropServices.WindowsRuntime;
 
-public class GameOver : MonoBehaviour
+public class CongratsScript : MonoBehaviour
 {
-    [SerializeField] private GameObject GameOverCanvas;
+    [SerializeField] private GameObject CongratulationsCanvas;
 
-    private bool isGameOver = false;
+    private bool hasWon = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isGameOver) return;
+        if (hasWon) return;
 
-        if(GameFlow.score <= 0)
+        if (GameFlow.score >= 100)
         {
-            TriggerGameOver();
+            TriggerVictory();
         }
     }
 
-    void TriggerGameOver()
+    void TriggerVictory()
     {
-        isGameOver = true;
+        hasWon = true;
         Time.timeScale = 0f;
-        GameOverCanvas.SetActive(true);
-        Debug.Log("Game Over!");
+        CongratulationsCanvas.SetActive(true);
+        Debug.Log("You Win!");
     }
 
     public void RestartGame()

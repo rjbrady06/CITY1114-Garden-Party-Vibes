@@ -11,6 +11,8 @@ public class ScoreUI : MonoBehaviour
     [SerializeField] private Image scoreFillImage;
     [SerializeField] private int maxScore = 100;
 
+   
+
 
     // Start is called before the first frame update
     void Start()
@@ -27,4 +29,6 @@ public class ScoreUI : MonoBehaviour
         progress = Mathf.Clamp01(progress);
         scoreFillImage.fillAmount = progress;
     }
+
+    
 }
