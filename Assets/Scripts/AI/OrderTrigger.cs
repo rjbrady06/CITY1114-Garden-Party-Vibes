@@ -80,14 +80,4 @@ public class OrderTrigger : MonoBehaviour
         Debug.Log("Order triggered. ");
         gameFlow.GenerateNextAvailableOrder();
     }
-
-//    private void OnTriggerEnter(Collider other)
-//   {
-//
-//        if (other.CompareTag("AI"))
-//        {
-//            Debug.Log("AI has entered the trigger box");
-//            TriggerOrder();
-//        }
-//    }
 }
